@@ -1,0 +1,65 @@
+﻿@page "/IndividualList"
+
+<h3>IndividualList</h3>
+
+@if (Individuals == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table" style="line-height:1">
+        <thead>
+            <tr>
+                @*<th></th>*@
+
+                <th>Name</th>
+
+                <th>DOB</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Phone No.</th>
+                <th>Education</th>
+                <th>Countory</th>
+                <th>Work Experience </th>
+                <th>Created Date</th>
+                <th>Modified Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var std in Individuals)
+            {
+            <tr>
+
+                <td>@std.Name</td>
+                <td>@std.DoB</td>
+                <td>@std.Address</td>
+                <td>@std.Email</td>
+                <td>@std.PhoneNumber</td>
+                <td>@std.EducationText</td>
+                <td>@std.CountryText</td>
+                <td>@std.WorkExprience</td>
+                <td>@std.CreateDate</td>
+                <td>@std.ModifiedDate</td>
+
+
+
+
+                <td>@Convert.ToDateTime(std.DoB).ToString("dd/MMM/yyyy")</td>
+
+
+
+                <td>
+                    <a href="/addeditindividual/@std.IndividualGuid" class="btn btn-secondary">Edit</a>
+            <button @onclick="(()=>DeleteIndividual(std.IndividualGuid))" class="btn btn-warning">❌</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+<a href="addeditindividual" class="btn btn-dark table-btn quick-add-btn float-right" title="Add new Student">&nbsp;&nbsp;+&nbsp;&nbsp;</a>
+
